@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -20,9 +21,8 @@ import jakarta.persistence.Table;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="product_id")
-	private UUID productId;
+	private String productId;
 	@Column(name="title")
 	private String title;
 	@Column(name="price")
@@ -31,9 +31,14 @@ public class Product {
 	private String description;
 	@Column(name="stock")
 	private long stock;
+	@Column(name="image_url")
+	private String imageURL;
 	
+	@Column(name="category_id")
+	private String categoryId;
 	
 	@ManyToOne
+	@MapsId("categoryId")
 	@JoinColumn(name="category_id")
 	private Category category;
 	
@@ -51,20 +56,21 @@ public class Product {
 		
 	}
 
-	public Product(String title, String price, String description, long stock, UUID categoryId) {
+	public Product(String title, String price, String description, long stock, UUID categoryId, String imageURL) {
 		super();
 		this.title = title;
 		this.price = price;
 		this.description = description;
 		this.stock = stock;
+		this.imageURL = imageURL;
 		
 	}
 
-	public UUID getProductId() {
+	public String getProductId() {
 		return productId;
 	}
 
-	public void setProductId(UUID productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
@@ -100,6 +106,24 @@ public class Product {
 		this.stock = stock;
 	}
 
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	
+	
 
 	
 	

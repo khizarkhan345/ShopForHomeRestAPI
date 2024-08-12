@@ -20,7 +20,7 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="category_id")
-	private UUID categoryId;
+	private String categoryId;
 	@Column(name="category_name")
 	private String categoryName;
 	
@@ -36,11 +36,11 @@ public class Category {
 		this.categoryName = categoryName;
 	}
 
-	public UUID getCategoryId() {
+	public String getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(UUID categoryId) {
+	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
 

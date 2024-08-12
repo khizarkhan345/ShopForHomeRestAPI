@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.shopforhome.com.entity.Category;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, UUID>{
+public interface CategoryRepository extends JpaRepository<Category, String>{
 
 }

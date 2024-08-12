@@ -9,7 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.shopforhome.com.entity.User;
-import com.shopforhome.com.exception.UserNotFoundException;
+import com.shopforhome.com.exception.NotFoundException;
 import com.shopforhome.com.exception.UserServiceException;
 import com.shopforhome.com.dao.UserRepository;
 
@@ -24,7 +24,7 @@ public class UserServiceDaoImpl implements UserServiceDao{
 		// TODO Auto-generated method stub
 		try {
             return userRepo.findById(theId)
-                           .orElseThrow(() -> new UserNotFoundException("User with ID " + theId + " not found"));
+                           .orElseThrow(() -> new NotFoundException("User with ID " + theId + " not found"));
         } catch (DataAccessException ex) {
             // Log the exception (using a logging framework) and throw a custom exception
             throw new UserServiceException("Failed to retrieve user with ID " + theId, ex);
