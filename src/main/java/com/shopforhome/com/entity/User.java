@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -19,8 +21,9 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy =GenerationType.AUTO)
-	private UUID userId;
+	//@GeneratedValue(strategy =GenerationType.AUTO)
+	@Column(name="user_id")
+	private String userId;
 	@Column(name="first_name")
 	private String firstName;
 	@Column(name="last_name")
@@ -35,7 +38,12 @@ public class User {
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 	private Cart cart;
 	
-	@ManyToMany(mappedBy="users", cascade=CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(
+		name = "user_coupons",
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "coupon_id")
+	)
 	private List<Coupon> coupons;
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
@@ -58,11 +66,11 @@ public class User {
 
 
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

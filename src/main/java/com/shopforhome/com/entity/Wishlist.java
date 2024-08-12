@@ -5,32 +5,37 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="wishlist")
-@IdClass(CartId.class)
 public class Wishlist {
 
+	
 	@Id
-	@Column(name="user_id")
-	private UUID userId;
-	@Id
-	@Column(name="product_id")
-	private UUID productId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="wishlist_id")
+	private UUID wishlistId;
 	
 	
 	@OneToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name="user_id")
 	private User user;
 	
 	@ManyToMany
-	@JoinColumn(name="productId")
+	@JoinTable(
+		name = "wishlist_products",
+		joinColumns = @JoinColumn(name = "wishlist_id"),
+		inverseJoinColumns = @JoinColumn(name = "product_id")
+	)
 	private List<Product> products;
 	
 	public Wishlist() {
@@ -39,26 +44,12 @@ public class Wishlist {
 
 	public Wishlist(UUID userId, UUID productId) {
 		super();
-		this.userId = userId;
-		this.productId = productId;
+		
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
+	
 
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
-	public UUID getProductId() {
-		return productId;
-	}
-
-	public void setProductId(UUID productId) {
-		this.productId = productId;
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -74,6 +65,7 @@ public class Wishlist {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	
 	
 	
 	

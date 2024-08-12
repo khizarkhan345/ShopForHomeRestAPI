@@ -31,15 +31,14 @@ public class Product {
 	private String description;
 	@Column(name="stock")
 	private long stock;
-	@Column(name="category_id")
-	private UUID categoryId;
+	
 	
 	@ManyToOne
-	@JoinColumn(name="categoryId")
+	@JoinColumn(name="category_id")
 	private Category category;
 	
-	@ManyToMany(mappedBy="cart", cascade=CascadeType.ALL)
-	private List<Cart> cart; 
+	@ManyToMany(mappedBy="product", cascade=CascadeType.ALL)
+	private List<CartItems> cartItems; 
 	
 	@ManyToMany(mappedBy="products", cascade=CascadeType.ALL)
 	private List<Wishlist> wishlist; 
@@ -58,7 +57,7 @@ public class Product {
 		this.price = price;
 		this.description = description;
 		this.stock = stock;
-		this.categoryId = categoryId;
+		
 	}
 
 	public UUID getProductId() {
@@ -101,14 +100,7 @@ public class Product {
 		this.stock = stock;
 	}
 
-	public UUID getCategoryId() {
-		return categoryId;
-	}
 
-	public void setCategoryId(UUID categoryId) {
-		this.categoryId = categoryId;
-	}
-	
 	
 	
 	
