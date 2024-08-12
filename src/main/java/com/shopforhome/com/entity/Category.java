@@ -18,7 +18,6 @@ public class Category {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="category_id")
 	private String categoryId;
 	@Column(name="category_name")
@@ -52,13 +51,6 @@ public class Category {
 		this.categoryName = categoryName;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
 	
 	
 }
