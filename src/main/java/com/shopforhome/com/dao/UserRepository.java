@@ -14,4 +14,6 @@ import com.shopforhome.com.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String>{
 
+	@Query("SELECT u FROM User u WHERE u.email = :email")
+	public User findUserByEmail(@Param("email") String email);
 }

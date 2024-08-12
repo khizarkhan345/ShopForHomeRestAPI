@@ -86,4 +86,15 @@ public class UserServiceDaoImpl implements UserServiceDao{
 	      }
 	}
 
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		try {
+            User user = userRepo.findUserByEmail(email);
+            return user;
+        } catch (DataAccessException ex) {
+            throw new UserServiceException("User not found ", ex);
+        }
+	}
+
 }
