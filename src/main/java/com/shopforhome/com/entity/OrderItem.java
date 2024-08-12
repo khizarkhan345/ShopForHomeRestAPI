@@ -19,21 +19,18 @@ public class OrderItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="order_item_id")
 	private UUID orderItemId;
-	@Column(name="order_id")
-	private UUID orderId;
-	@Column(name="product_id")
-	private UUID productId;
+	
 	@Column(name="quantity")
 	private long quantity;
 	@Column(name="unit_price")
 	private long unitPrice;
 	
 	@ManyToOne
-	@JoinColumn(name="productId")
+	@JoinColumn(name="product_id")
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name="orderId")
+	@JoinColumn(name="order_id")
 	private Order order;
 	
 	public OrderItem() {
@@ -44,8 +41,8 @@ public class OrderItem {
 
 	public OrderItem(UUID orderId, UUID productId, long quantity, long unitPrice) {
 		super();
-		this.orderId = orderId;
-		this.productId = productId;
+		
+	
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 	}
@@ -60,30 +57,6 @@ public class OrderItem {
 
 	public void setOrderItemId(UUID orderItemId) {
 		this.orderItemId = orderItemId;
-	}
-
-
-
-	public UUID getOrderId() {
-		return orderId;
-	}
-
-
-
-	public void setOrderId(UUID orderId) {
-		this.orderId = orderId;
-	}
-
-
-
-	public UUID getProductId() {
-		return productId;
-	}
-
-
-
-	public void setProductId(UUID productId) {
-		this.productId = productId;
 	}
 
 

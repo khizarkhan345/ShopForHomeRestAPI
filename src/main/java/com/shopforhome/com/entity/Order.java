@@ -23,15 +23,14 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="order_id")
 	private UUID orderId;
-	@Column(name="user_id")
-	private UUID userId;
+	
     @Column(name="order_date")
 	private LocalDate orderDate;
     @Column(name="total_price")
 	private double totalPrice;
     
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name="user_id")
     private User user;
 
     @OneToMany(mappedBy="order", cascade=CascadeType.ALL)
@@ -44,19 +43,11 @@ public class Order {
 
 	public Order(UUID userId, LocalDate orderDate, double unitPrice, double totalPrice) {
 		super();
-		this.userId = userId;
 		this.orderDate = orderDate;
 		this.totalPrice = totalPrice;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
+	
 	
 	
 	public LocalDate getOrderDate() {

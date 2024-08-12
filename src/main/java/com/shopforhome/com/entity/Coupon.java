@@ -23,12 +23,10 @@ public class Coupon {
 	@Column(name="coupon_code")
 	private String couponCode;
 	@Column(name="percentage")
-	private float couponPercentage;
-	@Column(name="user_id")
-	private UUID userId;
+	private double couponPercentage;
 	
-	@ManyToMany
-	@JoinColumn(name="userId")
+	
+	@ManyToMany(mappedBy="coupons")
 	private List<User> users;
 	
 	public Coupon() {
@@ -39,7 +37,6 @@ public class Coupon {
 		super();
 		this.couponCode = couponCode;
 		this.couponPercentage = couponPercentage;
-		this.userId = userId;
 	}
 
 	public UUID getCouponId() {
@@ -58,21 +55,14 @@ public class Coupon {
 		this.couponCode = couponCode;
 	}
 
-	public float getCouponPercentage() {
+	public double getCouponPercentage() {
 		return couponPercentage;
 	}
 
-	public void setCouponPercentage(float couponPercentage) {
+	public void setCouponPercentage(double couponPercentage) {
 		this.couponPercentage = couponPercentage;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
 	
 	
 	
