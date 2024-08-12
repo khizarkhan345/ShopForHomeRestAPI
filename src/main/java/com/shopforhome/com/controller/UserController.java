@@ -35,6 +35,10 @@ public class UserController {
 		return userDaoImpl.getAllUsers();
 	}
 	
+	@GetMapping("/userbyemail/{email}")
+	public User getUserByEmail(@PathVariable String email) {
+		return userDaoImpl.getUserByEmail(email);
+	}
 	
 	@PostMapping("/save")
 	public User saveUser(@RequestBody User user) {

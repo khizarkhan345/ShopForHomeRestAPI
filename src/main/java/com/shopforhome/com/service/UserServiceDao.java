@@ -9,6 +9,8 @@ public interface UserServiceDao {
 
 	public User getUserById(String theId) throws Exception;
 	
+	public User getUserByEmail(String email);
+	
 	public List<User> getAllUsers();
 	
 	public boolean deleteUserById(String theId) throws Exception;
