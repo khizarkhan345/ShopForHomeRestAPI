@@ -62,7 +62,7 @@ public class CartServiceDaoImpl implements CartServiceDao {
 		try {
 			return cartItemsRepo.findAll();
 		}catch(DataAccessException ex) {
-			throw new UserServiceException("Failed to retrieve users", ex);
+			throw new UserServiceException("Failed to retrieve Cart Items", ex);
 		}
 		
 		
@@ -73,10 +73,10 @@ public class CartServiceDaoImpl implements CartServiceDao {
 		// TODO Auto-generated method stub
 		try {
             return cartItemsRepo.findById(theId)
-                           .orElseThrow(() -> new NotFoundException("User with ID " + theId + " not found"));
+                           .orElseThrow(() -> new NotFoundException("CartItem with id " + theId + " not found"));
         } catch (DataAccessException ex) {
             // Log the exception (using a logging framework) and throw a custom exception
-            throw new UserServiceException("Failed to retrieve user with ID " + theId, ex);
+            throw new UserServiceException("Failed to retrieve cartItem with id " + theId, ex);
         }
 		
 	}
@@ -92,6 +92,7 @@ public class CartServiceDaoImpl implements CartServiceDao {
 			cartItem.setCartItemId(UUID.randomUUID().toString());
 			cartItem.setProduct(product);
 			cartItem.setCart(cart);
+			cartItem.setQuantity(quantity);
 			return cartItemsRepo.save(cartItem);
 			
 		}catch(DataAccessException ex) {
