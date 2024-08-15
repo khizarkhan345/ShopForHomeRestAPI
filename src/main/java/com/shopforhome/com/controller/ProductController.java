@@ -3,6 +3,7 @@ package com.shopforhome.com.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.shopforhome.com.service.ProductServiceDaoImpl;
 
 @RestController
 @RequestMapping("/api/product")
+@CrossOrigin
 public class ProductController {
 
 	@Autowired
@@ -36,7 +38,7 @@ public class ProductController {
 	public Product saveProduct(@RequestBody Product product) {
 		return productDaoImpl.saveProduct(product);
 	}
-	
+	 
 	@PutMapping("/{id}")
 	public Product updateProduct(@RequestBody Product product, @PathVariable String id) {
 		return productDaoImpl.updateProduct(product, id);

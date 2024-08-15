@@ -17,8 +17,7 @@ public class CartItems {
 	
 	@Id
 	@Column(name = "cart_item_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID cartItemId;
+	private String cartItemId;
 
 //	@Column(name="cart_id")
 //	private UUID cartId;
@@ -35,23 +34,23 @@ public class CartItems {
 	private Product product;
 
 	@Column(name = "quantity")
-	private int quantity;
+	private long quantity;
 	
 	public CartItems() {
 		
 	}
 
-	public UUID getCartItemId() {
+	public String getCartItemId() {
 		return cartItemId;
 	}
 
-	public void setCartItemId(UUID cartItemId) {
+	public void setCartItemId(String cartItemId) {
 		this.cartItemId = cartItemId;
 	}
 
-	public Cart getCart() {
-		return cart;
-	}
+//	public Cart getCart() {
+//		return cart;
+//	}
 
 	public void setCart(Cart cart) {
 		this.cart = cart;
@@ -65,11 +64,11 @@ public class CartItems {
 		this.product = product;
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
 	
