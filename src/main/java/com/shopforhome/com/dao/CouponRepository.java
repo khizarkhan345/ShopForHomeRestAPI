@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.shopforhome.com.entity.Coupon;
 
 @Repository
-public interface CouponRepository extends JpaRepository<Coupon, UUID> {
+public interface CouponRepository extends JpaRepository<Coupon, String> {
 
 }

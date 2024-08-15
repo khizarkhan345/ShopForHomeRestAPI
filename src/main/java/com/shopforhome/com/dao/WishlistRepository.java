@@ -7,6 +7,6 @@ import com.shopforhome.com.entity.CartId;
 import com.shopforhome.com.entity.Wishlist;
 
 @Repository
-public interface WishlistRepository extends JpaRepository<Wishlist, CartId>{
+public interface WishlistRepository extends JpaRepository<Wishlist, String>{
 
 }

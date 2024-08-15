@@ -42,7 +42,7 @@ public class Product {
 	@JoinColumn(name="category_id")
 	private Category category;
 	
-	@ManyToMany(mappedBy="product", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private List<CartItems> cartItems; 
 	
 	@ManyToMany(mappedBy="products", cascade=CascadeType.ALL)

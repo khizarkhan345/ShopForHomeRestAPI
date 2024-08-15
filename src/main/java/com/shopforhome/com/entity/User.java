@@ -35,8 +35,11 @@ public class User {
 	@Column(name="role")
 	private String role;
 	
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval = true)
 	private Cart cart;
+	
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL,  orphanRemoval = true)
+	private Wishlist wishlist;
 	
 	@ManyToMany
 	@JoinTable(
@@ -140,15 +143,29 @@ public class User {
 
 
 
-	public List<Order> getOrders() {
-		return orders;
-	}
+//	public List<Order> getOrders() {
+//		return orders;
+//	}
 
 
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
+
+
+    
+
+	public Wishlist getWishlist() {
+		return wishlist;
+	}
+
+
+
+	public void setWishlist(Wishlist wishlist) {
+		this.wishlist = wishlist;
+	}
+	
 	
 	
 }

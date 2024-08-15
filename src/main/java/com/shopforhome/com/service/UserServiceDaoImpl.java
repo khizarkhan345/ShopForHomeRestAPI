@@ -8,16 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.shopforhome.com.entity.Cart;
 import com.shopforhome.com.entity.User;
+import com.shopforhome.com.entity.Wishlist;
 import com.shopforhome.com.exception.NotFoundException;
 import com.shopforhome.com.exception.UserServiceException;
+import com.shopforhome.com.dao.CartRepository;
 import com.shopforhome.com.dao.UserRepository;
+import com.shopforhome.com.dao.WishlistRepository;
 
 @Service
 public class UserServiceDaoImpl implements UserServiceDao{
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private CartServiceDaoImpl cartServiceImpl;
+	
+	@Autowired 
+	private WishlistServiceDaoImpl wishlistServiceImpl;
 	
 	@Override
 	public User getUserById(String theId) throws Exception {
@@ -75,12 +85,48 @@ public class UserServiceDaoImpl implements UserServiceDao{
 	@Override
 	public User saveUser(User user) {
 		// TODO Auto-generated method stub
-		
+		//String myUserId;
+		//String myCartId;
+		//User savedUser;
 		 try {
 	          if (user.getUserId() == null) {
 	               user.setUserId(UUID.randomUUID().toString());
 	          }
-	           return userRepo.save(user);
+	          
+	          User savedUser = userRepo.save(user);
+	          //System.out.println(user.getRole().toLowerCase());
+	          if(user.getRole().toLowerCase().equals("customer")) {
+	        	  System.out.println("Createing cart");
+	        	  
+	        	  Cart existingCart = savedUser.getCart();
+	        	  
+	        	  if(existingCart == null) {
+	        		  Cart cart = cartServiceImpl.createCart(savedUser);
+//		        	  cart.setUser(savedUser);
+//		        	  cart.setCartId(UUID.randomUUID().toString());
+		      
+		        	  //cartRepo.save(cart);
+		        	  
+		        	  savedUser.setCart(cart);
+	        	  }
+	        	  
+	        	  Wishlist existingWishlist = savedUser.getWishlist();
+	        	  
+	        	  if(existingWishlist == null) {
+	        		  Wishlist wishlist = wishlistServiceImpl.saveWishlist(savedUser);
+		        	  //wishlist.setUser(savedUser);
+		        	  
+		        	  //wishlistRepo.save(wishlist);
+		        	  
+		        	  savedUser.setWishlist(wishlist);
+	        	  }
+//	        	  
+	        	  
+	        	 // userRepo.save(savedUser);
+	          }
+	          
+	
+	           return savedUser;
 	        } catch (DataAccessException ex) {
 	            throw new UserServiceException("Failed to save user", ex);
 	      }

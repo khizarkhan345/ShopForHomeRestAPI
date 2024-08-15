@@ -21,9 +21,8 @@ public class Wishlist {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="wishlist_id")
-	private UUID wishlistId;
+	private String wishlistId;
 	
 	
 	@OneToOne
@@ -42,17 +41,32 @@ public class Wishlist {
 		
 	}
 
-	public Wishlist(UUID userId, UUID productId) {
-		super();
-		
-	}
+	
 
 	
 
 	
-	public User getUser() {
-		return user;
+	public String getWishlistId() {
+		return wishlistId;
 	}
+
+
+
+
+
+
+	public void setWishlistId(String wishlistId) {
+		this.wishlistId = wishlistId;
+	}
+
+
+
+
+
+
+//	public User getUser() {
+//		return user;
+//	}
 
 	public void setUser(User user) {
 		this.user = user;
