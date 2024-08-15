@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shopforhome.com.entity.Cart;
 import com.shopforhome.com.entity.CartItems;
 import com.shopforhome.com.request.CartItemRequest;
+import com.shopforhome.com.request.CartItemUpdateRequest;
 import com.shopforhome.com.service.CartServiceDaoImpl;
 
 @RestController
@@ -50,5 +51,9 @@ public class CartController {
 	public boolean removeItemFromCart(@PathVariable String id) {
 		return cartServiceImpl.removeItemsFromCart(id);
 	}
+    
+    public CartItems updateCartItemQuantity(@RequestBody CartItemUpdateRequest cartItemUpdateRequest) {
+    	return cartServiceImpl.updateCartItem(cartItemUpdateRequest.getCartItemId(), cartItemUpdateRequest.getNewQuantity());
+    }
 	
 }
