@@ -34,7 +34,7 @@ public class CartItems {
 	private Product product;
 
 	@Column(name = "quantity")
-	private int quantity;
+	private long quantity;
 	
 	public CartItems() {
 		
@@ -64,11 +64,11 @@ public class CartItems {
 		this.product = product;
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
 	

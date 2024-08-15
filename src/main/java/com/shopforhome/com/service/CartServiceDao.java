@@ -16,7 +16,11 @@ public interface CartServiceDao {
 	
 	public CartItems getCartItemsById(String theId);
 	
-	public CartItems saveCartItems(Cart cart, String productId, long quantity);
+	public boolean  removeItemsFromCart(String theId);
+	
+	public CartItems  addItemToCart(Cart cart, String productId, long quantity);
+	
+	public CartItems updateCartItem(String cartItemId, long newQuantity);
 	
 	//public Cart editCart(Cart cart, )
 }
