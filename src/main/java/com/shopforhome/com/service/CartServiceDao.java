@@ -16,6 +16,8 @@ public interface CartServiceDao {
 	
 	public CartItems getCartItemsById(String theId);
 	
+	public List<CartItems> getCartItemsByCartId(String theId);
+	
 	public boolean  removeItemsFromCart(String theId);
 	
 	public CartItems  addItemToCart(Cart cart, String productId, long quantity);

@@ -69,7 +69,7 @@ public class WishlistServiceDaoImpl implements WishlistServiceDao {
 	}
 	
 	@Override
-	public Wishlist removeProductToWishlist(String wishlistId, String productId) {
+	public boolean removeProductFromWishlist(String wishlistId, String productId) {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -79,12 +79,23 @@ public class WishlistServiceDaoImpl implements WishlistServiceDao {
 				
 			  wishlist.getProducts().remove(product);
 				
-			  return wishlistRepo.save(wishlist);
+			  wishlistRepo.save(wishlist);
+			  return true;
 		}catch (DataAccessException ex) {
             throw new UserServiceException("Failed to remove product from wishlist ", ex);
         }
         
 		
+	}
+	@Override
+	public Wishlist getAllWishlistItemsById(String theId) {
+		// TODO Auto-generated method stub
+		try {
+            return wishlistRepo.getAllWishlistItemsById(theId);
+        } catch (DataAccessException ex) {
+            // Log the exception (using a logging framework) and throw a custom exception
+            throw new UserServiceException("Failed to retrieve all Wishlist Items with id " + theId, ex);
+        }
 	}
 
 }
