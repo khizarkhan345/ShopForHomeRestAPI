@@ -1,5 +1,6 @@
 package com.shopforhome.com.entity;
 
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -55,6 +56,8 @@ public class CartItems {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
+	
 
 	public Product getProduct() {
 		return product;

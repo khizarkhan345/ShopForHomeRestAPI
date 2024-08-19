@@ -11,7 +11,9 @@ public interface WishlistServiceDao {
 	 
 	 public Wishlist addProductToWishlist(String wishlistId, String productId);
 	 
-	 public Wishlist removeProductToWishlist(String wishlistId, String productId);
+	 public boolean removeProductFromWishlist(String wishlistId, String productId);
 	 
 	 public Wishlist saveWishlist(User user);
+	 
+	 public Wishlist getAllWishlistItemsById(String theId);
 }

@@ -130,4 +130,15 @@ public class CartServiceDaoImpl implements CartServiceDao {
         }
 	}
 
+	@Override
+	public List<CartItems> getCartItemsByCartId(String theId) {
+		// TODO Auto-generated method stub
+		try {
+            return cartItemsRepo.getCartItemsByCartId(theId);
+        } catch (DataAccessException ex) {
+            // Log the exception (using a logging framework) and throw a custom exception
+            throw new UserServiceException("Failed to retrieve cartItems with id " + theId, ex);
+        }
+	}
+
 }
