@@ -16,14 +16,13 @@ import jakarta.persistence.Table;
 public class OrderItem {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="order_item_id")
-	private UUID orderItemId;
+	private String orderItemId;
 	
 	@Column(name="quantity")
 	private long quantity;
 	@Column(name="unit_price")
-	private long unitPrice;
+	private double unitPrice;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
@@ -39,7 +38,7 @@ public class OrderItem {
 
     
 
-	public OrderItem(UUID orderId, UUID productId, long quantity, long unitPrice) {
+	public OrderItem(long quantity, long unitPrice) {
 		super();
 		
 	
@@ -49,13 +48,13 @@ public class OrderItem {
 
 
 
-	public UUID getOrderItemId() {
+	public String getOrderItemId() {
 		return orderItemId;
 	}
 
 
 
-	public void setOrderItemId(UUID orderItemId) {
+	public void setOrderItemId(String orderItemId) {
 		this.orderItemId = orderItemId;
 	}
 
@@ -73,13 +72,13 @@ public class OrderItem {
 
 
 
-	public long getUnitPrice() {
+	public double getUnitPrice() {
 		return unitPrice;
 	}
 
 
 
-	public void setUnitPrice(long unitPrice) {
+	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
@@ -97,16 +96,18 @@ public class OrderItem {
 
 
 
-	public Order getOrder() {
-		return order;
-	}
-
-
+//	public Order getOrder() {
+//		return order;
+//	}
+//
+//
 
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-	
+
+    
+    
 	
 	
 	

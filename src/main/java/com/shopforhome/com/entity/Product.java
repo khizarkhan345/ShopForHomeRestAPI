@@ -26,7 +26,7 @@ public class Product {
 	@Column(name="title")
 	private String title;
 	@Column(name="price")
-	private String price;
+	private double price;
 	@Column(name="description")
 	private String description;
 	@Column(name="stock")
@@ -56,7 +56,7 @@ public class Product {
 		
 	}
 
-	public Product(String title, String price, String description, long stock, UUID categoryId, String imageURL) {
+	public Product(String title, double price, String description, long stock, UUID categoryId, String imageURL) {
 		super();
 		this.title = title;
 		this.price = price;
@@ -82,11 +82,11 @@ public class Product {
 		this.title = title;
 	}
 
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

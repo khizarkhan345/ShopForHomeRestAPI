@@ -14,5 +14,7 @@ public interface ProductServiceDao {
 	
 	public Product updateProduct(Product product, String theId);
 	
+	public Product updateProductStock(long newStock, String theId);
+	
 	public boolean deleteProduct(String theId);
 }

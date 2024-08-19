@@ -49,7 +49,7 @@ public class CategoryServiceDaoImpl implements CategoryServiceDao{
 			}
 			return categoryRepo.save(category);
 		}catch(DataAccessException ex) {
-			throw new UserServiceException("Failed to save the product", ex);
+			throw new UserServiceException("Failed to save the Category", ex);
 		}
 	}
 

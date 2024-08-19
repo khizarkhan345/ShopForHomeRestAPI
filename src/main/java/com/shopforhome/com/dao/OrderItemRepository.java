@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.shopforhome.com.entity.OrderItem;
 
 @Repository
-public interface OrderItemRepository extends JpaRepository<OrderItem, UUID>{
+public interface OrderItemRepository extends JpaRepository<OrderItem, String>{
 
 }
