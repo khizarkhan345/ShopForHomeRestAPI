@@ -30,7 +30,7 @@ public class UserServiceDaoImpl implements UserServiceDao{
 	private WishlistServiceDaoImpl wishlistServiceImpl;
 	
 	@Override
-	public User getUserById(String theId) throws Exception {
+	public User getUserById(String theId) {
 		// TODO Auto-generated method stub
 		try {
             return userRepo.findById(theId)
