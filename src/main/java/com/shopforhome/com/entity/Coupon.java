@@ -1,5 +1,6 @@
 package com.shopforhome.com.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,9 +18,8 @@ import jakarta.persistence.Table;
 public class Coupon {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="coupon_id")
-	private UUID couponId;
+	private String couponId;
 	@Column(name="coupon_code")
 	private String couponCode;
 	@Column(name="percentage")
@@ -39,11 +39,11 @@ public class Coupon {
 		this.couponPercentage = couponPercentage;
 	}
 
-	public UUID getCouponId() {
+	public String getCouponId() {
 		return couponId;
 	}
 
-	public void setCouponId(UUID couponId) {
+	public void setCouponId(String couponId) {
 		this.couponId = couponId;
 	}
 
@@ -63,7 +63,15 @@ public class Coupon {
 		this.couponPercentage = couponPercentage;
 	}
 
-	
-	
+	public List<String> getUsersName(){
+		
+		List<String> userNames = new ArrayList<>();
+		for(User user : users) {
+			String name = user.getFirstName() + " " + user.getLastName();
+			userNames.add(name);
+		}
+		
+		return userNames;
+	}
 	
 }

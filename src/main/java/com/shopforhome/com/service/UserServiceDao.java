@@ -7,7 +7,7 @@ import com.shopforhome.com.entity.User;
 
 public interface UserServiceDao {
 
-	public User getUserById(String theId) throws Exception;
+	public User getUserById(String theId);
 	
 	public User getUserByEmail(String email);
 	
