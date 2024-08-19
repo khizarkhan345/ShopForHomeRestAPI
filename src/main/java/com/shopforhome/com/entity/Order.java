@@ -20,9 +20,8 @@ import jakarta.persistence.Table;
 public class Order {
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="order_id")
-	private UUID orderId;
+	private String orderId;
 	
     @Column(name="order_date")
 	private LocalDate orderDate;
@@ -41,7 +40,7 @@ public class Order {
 
 	}
 
-	public Order(UUID userId, LocalDate orderDate, double unitPrice, double totalPrice) {
+	public Order(String userId, LocalDate orderDate, double unitPrice, double totalPrice) {
 		super();
 		this.orderDate = orderDate;
 		this.totalPrice = totalPrice;
@@ -68,11 +67,11 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public UUID getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(UUID orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shopforhome.com.entity.Product;
+import com.shopforhome.com.request.ProductRequest;
 import com.shopforhome.com.service.ProductServiceDaoImpl;
 
 @RestController
@@ -42,6 +43,11 @@ public class ProductController {
 	@PutMapping("/{id}")
 	public Product updateProduct(@RequestBody Product product, @PathVariable String id) {
 		return productDaoImpl.updateProduct(product, id);
+	}
+	
+	@PutMapping("/updateStock/{id}")
+	public Product updateProductStock(@RequestBody ProductRequest productReq, @PathVariable String id) {
+		return productDaoImpl.updateProductStock(productReq.getNewStock(), id);
 	}
 	
 	@DeleteMapping("/{id}")

@@ -80,4 +80,16 @@ public class ProductServiceDaoImpl implements ProductServiceDao{
 	        }
 	}
 
+	@Override
+	public Product updateProductStock(long newStock, String theId) {
+		// TODO Auto-generated method stub
+		try {
+			Product existingProduct = productRepo.findById(theId).get(); 
+			existingProduct.setStock(newStock);
+			return productRepo.save(existingProduct);
+		}catch(DataAccessException ex) {
+			throw new UserServiceException("Failed to update the product", ex);
+		}
+	}
+
 }
