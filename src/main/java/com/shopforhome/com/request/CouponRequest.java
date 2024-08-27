@@ -38,6 +38,12 @@ public class CouponRequest {
 		this.userIds = userIds;
 	}
 
+	@Override
+	public String toString() {
+		return "CouponRequest [couponCode=" + couponCode + ", couponPercentage=" + couponPercentage + ", userIds="
+				+ userIds + "]";
+	}
+
 	
 
 	

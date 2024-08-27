@@ -1,6 +1,7 @@
 package com.shopforhome.com.dao;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,5 @@ import com.shopforhome.com.entity.User;
 public interface UserRepository extends JpaRepository<User, String>{
 
 	@Query("SELECT u FROM User u WHERE u.email = :email")
-	public User findUserByEmail(@Param("email") String email);
+	public Optional<User> findUserByEmail(@Param("email") String email);
 }

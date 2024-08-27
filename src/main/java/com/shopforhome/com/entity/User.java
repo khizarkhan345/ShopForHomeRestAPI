@@ -1,7 +1,13 @@
 package com.shopforhome.com.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,7 +24,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	//@GeneratedValue(strategy =GenerationType.AUTO)
@@ -141,19 +147,6 @@ public class User {
 		this.coupons = coupons;
 	}
 
-
-
-//	public List<Order> getOrders() {
-//		return orders;
-//	}
-
-
-//
-//	public void setOrders(List<Order> orders) {
-//		this.orders = orders;
-//	}
-
-
     
 
 	public Wishlist getWishlist() {
@@ -165,6 +158,45 @@ public class User {
 	public void setWishlist(Wishlist wishlist) {
 		this.wishlist = wishlist;
 	}
+
+
+
+//	@Override
+//	public String getAuthorities() {
+//		// TODO Auto-generated method stub
+//		return role;
+//	}
+
+
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		String ROLE_PREFIX = "Role_";
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role));
+        return list;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", role=" + role + "]";
+	}
+
+
+    
+	
 	
 	
 	

@@ -45,7 +45,7 @@ public class ProductController {
 		return productDaoImpl.updateProduct(product, id);
 	}
 	
-	@PutMapping("/updateStock/{id}")
+	@PutMapping("/updatestock/{id}")
 	public Product updateProductStock(@RequestBody ProductRequest productReq, @PathVariable String id) {
 		return productDaoImpl.updateProductStock(productReq.getNewStock(), id);
 	}

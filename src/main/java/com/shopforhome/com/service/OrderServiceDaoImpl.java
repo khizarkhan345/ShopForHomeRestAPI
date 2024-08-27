@@ -53,36 +53,29 @@ public class OrderServiceDaoImpl implements OrderServiceDao {
 			
 			order.setUser(user);
 			
-			Order savedOrder = orderRepo.save(order);
-			
-			for(OrderItemRequest orderItemReq: orderRequest.getOrderItemRequest()) {
-				OrderItem orderItem = new OrderItem();
-				
-				orderItem.setOrderItemId(UUID.randomUUID().toString());
-				orderItem.setQuantity(orderItemReq.getQuantity());
-				orderItem.setUnitPrice(orderItemReq.getUnitPrice());
-				
-				Product product = productServiceImpl.getProductById(orderItemReq.getProductId());
-				
-				orderItem.setProduct(product);
-				
-				orderItem.setOrder(savedOrder);
-				
-				orderItemRepo.save(orderItem);
-				if(order.getOrderItems() == null) {
-					List<OrderItem> newOrderItem = new ArrayList<>();
-					newOrderItem.add(orderItem);
-					savedOrder.setOrderItems(newOrderItem);
-				}else {
-					savedOrder.getOrderItems().add(orderItem);
-				}
-				
-				
-			}
-			
-			
-		
-			return orderRepo.save(savedOrder);
+			 List<OrderItem> orderItems = new ArrayList<>();
+
+		        for (OrderItemRequest orderItemReq : orderRequest.getOrderItemRequest()) {
+		            OrderItem orderItem = new OrderItem();
+		            orderItem.setOrderItemId(UUID.randomUUID().toString());
+		            orderItem.setQuantity(orderItemReq.getQuantity());
+		            orderItem.setUnitPrice(orderItemReq.getUnitPrice());
+
+		            Product product = productServiceImpl.getProductById(orderItemReq.getProductId());
+		            orderItem.setProduct(product);
+		            orderItem.setOrder(order);
+
+		            orderItems.add(orderItem);
+		        }
+
+		        order.setOrderItems(orderItems);
+		        Order savedOrder = orderRepo.save(order);
+
+		        for (OrderItem orderItem : orderItems) {
+		            orderItemRepo.save(orderItem);
+		        }
+
+		        return savedOrder;
 		
 	}catch(DataAccessException ex) {
 		throw new UserServiceException("Failed to create new order", ex);

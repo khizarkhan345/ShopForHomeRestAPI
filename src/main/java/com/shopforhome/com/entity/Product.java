@@ -114,12 +114,20 @@ public class Product {
 		this.imageURL = imageURL;
 	}
 
-	public String getCategoryId() {
-		return categoryId;
-	}
+//	public String getCategoryId() {
+//		return categoryId;
+//	}
 
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	

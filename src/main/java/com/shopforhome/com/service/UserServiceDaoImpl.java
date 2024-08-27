@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.shopforhome.com.entity.Cart;
@@ -13,6 +16,7 @@ import com.shopforhome.com.entity.User;
 import com.shopforhome.com.entity.Wishlist;
 import com.shopforhome.com.exception.NotFoundException;
 import com.shopforhome.com.exception.UserServiceException;
+import com.shopforhome.com.request.LogInRequest;
 import com.shopforhome.com.dao.CartRepository;
 import com.shopforhome.com.dao.UserRepository;
 import com.shopforhome.com.dao.WishlistRepository;
@@ -28,6 +32,13 @@ public class UserServiceDaoImpl implements UserServiceDao{
 	
 	@Autowired 
 	private WishlistServiceDaoImpl wishlistServiceImpl;
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	
 	@Override
 	public User getUserById(String theId) {
@@ -88,12 +99,20 @@ public class UserServiceDaoImpl implements UserServiceDao{
 		//String myUserId;
 		//String myCartId;
 		//User savedUser;
+		
+		User newUser = new User();
 		 try {
-	          if (user.getUserId() == null) {
-	               user.setUserId(UUID.randomUUID().toString());
+	          if (newUser.getUserId() == null) {
+	               newUser.setUserId(UUID.randomUUID().toString());
 	          }
 	          
-	          User savedUser = userRepo.save(user);
+	          newUser.setFirstName(user.getFirstName());
+	          newUser.setLastName(user.getLastName());
+	          newUser.setEmail(user.getEmail());
+	          newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+	          newUser.setRole(user.getRole());
+	          
+	          User savedUser = userRepo.save(newUser);
 	          //System.out.println(user.getRole().toLowerCase());
 	          if(user.getRole().toLowerCase().equals("customer")) {
 	        	  System.out.println("Createing cart");
@@ -136,11 +155,24 @@ public class UserServiceDaoImpl implements UserServiceDao{
 	public User getUserByEmail(String email) {
 		// TODO Auto-generated method stub
 		try {
-            User user = userRepo.findUserByEmail(email);
+            User user = userRepo.findUserByEmail(email).get();
             return user;
         } catch (DataAccessException ex) {
             throw new UserServiceException("User not found ", ex);
         }
 	}
+	
+	
+	public User authenticate(LogInRequest input) {
+	        authenticationManager.authenticate(
+	                new UsernamePasswordAuthenticationToken(
+	                        input.getEmail(),
+	                        input.getPassword()
+	                )
+	        );
+
+	        return userRepo.findUserByEmail(input.getEmail())
+	                .orElseThrow();
+	  }
 
 }

@@ -31,6 +31,7 @@ public class CouponController {
 	
 	@PostMapping("/save")
 	public Coupon createCoupon(@RequestBody CouponRequest couponRequest) {
+		System.out.println(couponRequest);
 		return couponServiceImpl.CreateCoupon(couponRequest);
 	}
 	

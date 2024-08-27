@@ -1,5 +1,6 @@
 package com.shopforhome.com.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,20 +28,25 @@ public class CouponServiceDaoImpl implements CouponServiceDao{
 	public Coupon CreateCoupon(CouponRequest couponRequest) {
 		// TODO Auto-generated method stub
 		try {
-			
-			    
-				
-				
-				Coupon coupon = new Coupon();
-				
+			    Coupon coupon = new Coupon();
 				
 				coupon.setCouponId(UUID.randomUUID().toString());
 				coupon.setCouponCode(couponRequest.getCouponCode());
 				coupon.setCouponPercentage(couponRequest.getCouponPercentage());
 				
 				for(String userId: couponRequest.getUserIds()) {
+					
 					User user = userServiceImpl.getUserById(userId);
-					user.getCoupons().add(coupon);
+					
+					System.out.println(user);
+					if(user.getCoupons() == null) {
+						List<Coupon> couponList = new ArrayList<>();
+						couponList.add(coupon);
+						user.setCoupons(couponList);
+					}else {
+						user.getCoupons().add(coupon);
+					}
+					
 				}
 				
 				
